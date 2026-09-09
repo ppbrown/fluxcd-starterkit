@@ -3,7 +3,7 @@
 # GITHUB_ID=yourname   # uncomment and set this to skip auto-detection
 #
 # export GITHUB_TOKEN=ghp_xxxxx
-
+REPO=fluxcd-starterkit
 
 if [[ "$GITHUB_TOKEN" == "" ]] ; then
 	echo Error: you must have GITHUB_TOKEN set
@@ -83,7 +83,7 @@ which kubectl || (
 
 which flux || install_flux
 
-flux bootstrap github  --owner=$GITHUB_ID --repository=fluxcd-starterkit \
+flux bootstrap github  --owner=$GITHUB_ID --repository=$REPO \
       --token-auth $PERSONAL \
       --path prod \
       --components-extra=image-reflector-controller,image-automation-controller
