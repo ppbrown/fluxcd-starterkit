@@ -1,0 +1,27 @@
+apiVersion: image.toolkit.fluxcd.io/v1
+kind: ImageUpdateAutomation
+metadata:
+  name: ghcr-app
+  namespace: flux-system
+spec:
+  interval: 5m0s
+  sourceRef:
+    kind: GitRepository
+    name: flux-system
+  git:
+    checkout:
+      ref:
+        branch: main
+    commit:
+      author:
+        email: fluxcdbot@users.noreply.github.com
+        name: fluxcdbot
+      messageTemplate: |
+        Auto-update ghcr-app image tag
+
+        {{range .Changed.Objects}}{{println .}}{{end}}
+    push:
+      branch: main
+  update:
+    path: ./prod/ghcr-app
+    strategy: Setters

@@ -1,0 +1,13 @@
+apiVersion: image.toolkit.fluxcd.io/v1
+kind: ImagePolicy
+metadata:
+  name: ghcr-app
+  namespace: flux-system
+spec:
+  imageRepositoryRef:
+    name: ghcr-app
+  filterTags:
+    pattern: '^[0-9]+$'
+  policy:
+    numerical:
+      order: asc
