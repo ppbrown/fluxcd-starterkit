@@ -1,7 +1,14 @@
 #!/bin/bash
 
-
 # GITHUB_ID=yourname   # uncomment and set this to skip auto-detection
+#
+# export GITHUB_TOKEN=ghp_xxxxx
+
+
+if [[ "$GITHUB_TOKEN" == "" ]] ; then
+	echo Error: you must have GITHUB_TOKEN set
+	exit 1
+fi
 
 install_flux(){
     curl -s https://fluxcd.io/install.sh | sudo bash

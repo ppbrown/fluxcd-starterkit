@@ -13,8 +13,8 @@ Even simpler, I now provide a
 
     [install.sh](install.sh)
 
-script that can do everything except set up a kubernetes cluster for you. But if you'd
-like to see the details, please read on.
+script that can do everything except set up a kubernetes cluster for you, and create
+the GH credential. But if you'd like to see the details, please read on.
 
 
 # Prerequisites
