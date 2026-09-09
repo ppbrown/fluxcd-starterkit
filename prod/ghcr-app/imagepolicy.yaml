@@ -7,7 +7,7 @@ spec:
   imageRepositoryRef:
     name: ghcr-app
   filterTags:
-    pattern: '^[0-9]+$'
+    pattern: '^main-[0-9]+$'
   policy:
     numerical:
       order: asc
