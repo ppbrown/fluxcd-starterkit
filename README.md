@@ -55,6 +55,14 @@ If you do a straight fork, then you will need to edit one file in your own repo 
 
 - fluxcd-ghcr-app/deployment.yaml
 
+you will also need to make sure that you generated a new image to pull. 
+Go look at
+
+    https:/ghcr.io/yourname/ghcr-test
+
+If there's nothing there then you have to trigger a build by pushing a new number to
+https://github.com/yourname/ghcr-test/blob/main/deploytest_tag
+
 ## Starting up Flux!
 
 (make sure you have exported `GITHUB_TOKEN` with the secret value first!!)
