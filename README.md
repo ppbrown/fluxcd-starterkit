@@ -1,61 +1,63 @@
 # fluxcd-starterkit
 
-This repo is a specially cleaned up version of a working flux cluster state repo,
-WITH a sample auto-updater gitops pipeline all tested and ready to go.
+* What does this repo give you?
 
+An instance of the Flux CD orchestration tool set up in a kubernetes
+cluster, fconfigured with a sample application to demonstrate full GitOps style
+"Auto update deployment on application publish"
 
-In a [different repo](https://github.com/ppbrown/fluxcd-public-demo), 
-I have a zero-touch flux demo, for people who dont want
-to deal with setting up Git Tokens for access, etc. 
-However, that approach is somewhat limited. It cant do some of the fancy stuff
-like auto-updating, since that requires giving flux access to WRITE to the repo.
+Some assembly required, but dont worry, I have step-by-step instructions for you.
 
-On the flip side, that typically means you may end up writing secrets to the repo,
-which then makes it a very bad thing to share publically.
-
-That is why THIS repo exists.
+Perhaps one day, I will provide a "does it all" set-up script. But that day is not today.
 
 
 # Prerequisites
 
 ## Kubernetes
 
-Install a kubernetes cluster.  For a 1-node quickstart Ubuntu, you could use 
+If you dont already have one, you will need to install a kubernetes cluster.
+For a 1-node quickstart on Ubuntu, you could use 
 
     curl -sfL https://get.k3s.io | sh - 
-    # you then either need to give yourself cluster access or run as root
+    # You then either need to give yourself cluster access or run as root
 
-## Install flux binary
+## Install the 'flux' binary
 
     curl -s https://fluxcd.io/install.sh | sudo bash
 
 
 # FluxCD Install instructions
 
+You have the binary, but now we must set up the services.
+
 ## Repo preparations
 
-Here are step-by-step instructions on how to get FluxCD up and running with this setup.
-
-First you will need to fork (not clone!) this repo, since you need a repo you can write to!
+First you will need to fork (not clone!) this repo, since you need a repo Flux can write
+to!
 
 Let's say you fork it to `yourname/fluxcd-starterkit`
 
 MAKE IT PRIVATE RIGHT NOW!! DO NOT GO FURTHER UNTIL YOU HAVE FIXED THIS!!
 
-Next, make a github access token that has full read/write to your new repo.
+Next, make a github access token (AKA Personal Access Token, "PAT") that has full
+read/write to your new repo.
 
-After that, you probably will want to fork (not clone!) the target repos so you can
-experiment with auto-updates yourself. These are:
+
+## Backend repos
+
+Unless you already know a little about flux setup and have your own repos, you will
+probably want to use my related ones as a head start.
+
+Fork (not clone!) the target repos below so you can experiment with auto-updates yourself. 
 
 * https://github.com/ppbrown/fluxcd-ghcr-app
 * https://github.com/ppbrown/ghcr-test
 
-If you do a straight fork, then you will need to edit one file in your own repo to change
-`ppbrown` to `yourname`:
+Then you will need to edit one file in your own repo to change `ppbrown` to `yourname`:
 
 - fluxcd-ghcr-app/deployment.yaml
 
-you will also need to make sure that you generated a new image to pull. 
+You will also need to make sure that you generated a new image to pull. 
 Go look at
 
     https:/ghcr.io/yourname/ghcr-test
@@ -69,10 +71,10 @@ https://github.com/yourname/ghcr-test/blob/main/deploytest_tag
 
     flux bootstrap github  --owner=yourname --repository=fluxcd-starterkit \
       --token-auth --personal \
-      --components-extra=image-reflector-controller,image-automation-controller \
+      --components-extra=image-reflector-controller,image-automation-controller 
     # if you are doing this with an "Org" type account, omit the --personal
 
-and now... wait a few minutes!
+And now... wait a few minutes!
 
 It should take a few minutes for flux to insert its services into the cluster, and then
 a few more minutes for it to read the actual app configuration, and start pulling in
