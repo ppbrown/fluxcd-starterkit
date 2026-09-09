@@ -6,7 +6,8 @@ An instance of the Flux CD orchestration tool set up in a kubernetes
 cluster, fconfigured with a sample application to demonstrate full GitOps style
 "Auto update deployment on application publish"
 
-Some assembly required, but dont worry, I have step-by-step instructions for you.
+Some assembly required, but dont worry, I have step-by-step instructions for you, and they
+are *wayyy* shorter than the 20 pages of docs on the official flux-cd site.
 
 Perhaps one day, I will provide a "does it all" set-up script. But that day is not today.
 
