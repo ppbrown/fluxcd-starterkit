@@ -9,7 +9,12 @@ cluster, fconfigured with a sample application to demonstrate full GitOps style
 Some assembly required, but dont worry, I have step-by-step instructions for you, and they
 are *wayyy* shorter than the 20 pages of docs on the official flux-cd site.
 
-Perhaps one day, I will provide a "does it all" set-up script. But that day is not today.
+Even simpler, I now provide a
+
+    [install.sh](install.sh)
+
+script that can do everything except set up a kubernetes cluster for you. But if you'd
+like to see the details, please read on.
 
 
 # Prerequisites
