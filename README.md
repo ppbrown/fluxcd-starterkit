@@ -61,7 +61,7 @@ Fork (not clone!) the target repos below so you can experiment with auto-updates
 
 Then you will need to edit one file in your own repo to change `ppbrown` to `yourname`:
 
-- fluxcd-ghcr-app/deployment.yaml
+- fluxcd-ghcr-app repo, /deployment.yaml
 
 You will also need to make sure that you generated a new image to pull. 
 Go look at
