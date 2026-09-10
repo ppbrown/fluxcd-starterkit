@@ -14,3 +14,20 @@ spec:
   images:
     - name: ghcr.io/ppbrown/ghcr-test
       newTag: "14" # {"$imagepolicy": "flux-system:ghcr-app:tag"}
+  patches:
+    - target:
+        kind: Deployment
+        name: ghcr-app
+      patch: |
+        apiVersion: apps/v1
+        kind: Deployment
+        metadata:
+          name: ghcr-app
+        spec:
+          template:
+            spec:
+              containers:
+                - name: ghcr-app
+                  env:
+                    - name: CUSTOM_CONTENT
+                      value: "Local fluxCD override here"
