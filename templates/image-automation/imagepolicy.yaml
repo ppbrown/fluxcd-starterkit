@@ -7,7 +7,8 @@ spec:
   imageRepositoryRef:
     name: CHANGEME
   filterTags:
-    pattern: '^[0-9]+$'
+    pattern: '^main-(?P<num>[0-9]+)$'
+    extract: '$num'
   policy:
     numerical:
       order: asc
