@@ -92,24 +92,24 @@ At this point you should be able to see the service running:
     NAME       TYPE        CLUSTER-IP      EXTERNAL-IP   PORT(S)    AGE
     ghcr-app   ClusterIP   10.43.188.108   <none>        8080/TCP   23h
 
-    # kubectl port-forward -n ghcr-app  service/ghcr-app  8080
 
-At that point, you should be able to point your webbrowser at http://localhost:8080
-and see output from it.
+To directly view in browser, one way is to set up port forwarding for
+http://localhost:8080
+
+    # kubectl port-forward -n ghcr-app  service/ghcr-app  8080
 
 ### Semi-permanent access (skip the port-forward)
 
-On k3s, this survives pod restarts/updates and needs no repo changes:
+The downside with port forwarding, other than hogging a terminal, is that it fails on
+service restart.
+
+A way around this is to set up loadbalancer style forwarding on your test node 
 
     kubectl expose service ghcr-app -n ghcr-app \
       --type=LoadBalancer --name=ghcr-app-lb --port=8080
 
-k3s's built-in ServiceLB assigns it your node's IP. Browse to `http://<node-ip>:8080`.
+Find the right IP address to hit, with `kubectl -n ghcr-app get svc ghcr-app-lb` for
+the EXTERNAL-IP, and browse to `http://<that-ip>:8080` (not `localhost`).
 
-But then, after that point, if you edit and push the number in repo 
-`yourname/ghcr-test/deploytest_tag` to a larger number... github will autobuild a new
-image. Then a few minutes later, flux scanning will notice a newer image, and update
-its configs. And a few minutes after that, it will trigger a redeploy of the app with the
-newer image.
 
 
