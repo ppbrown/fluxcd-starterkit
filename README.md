@@ -3,7 +3,7 @@
 * What does this repo give you?
 
 An instance of the Flux CD orchestration tool set up in a kubernetes
-cluster, fconfigured with a sample application to demonstrate full GitOps style
+cluster, configured with a sample application to demonstrate full GitOps style
 "Auto update deployment on application publish"
 
 Some assembly required, but dont worry, I have step-by-step instructions for you, and they
