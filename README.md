@@ -97,6 +97,15 @@ At this point you should be able to see the service running:
 At that point, you should be able to point your webbrowser at http://localhost:8080
 and see output from it.
 
+### Semi-permanent access (skip the port-forward)
+
+On k3s, this survives pod restarts/updates and needs no repo changes:
+
+    kubectl expose service ghcr-app -n ghcr-app \
+      --type=LoadBalancer --name=ghcr-app-lb --port=8080
+
+k3s's built-in ServiceLB assigns it your node's IP. Browse to `http://<node-ip>:8080`.
+
 But then, after that point, if you edit and push the number in repo 
 `yourname/ghcr-test/deploytest_tag` to a larger number... github will autobuild a new
 image. Then a few minutes later, flux scanning will notice a newer image, and update
