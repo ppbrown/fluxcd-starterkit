@@ -71,7 +71,7 @@ Go look at
 If there's nothing there then you have to trigger a build by pushing a new number to
 https://github.com/yourname/ghcr-test/blob/main/deploytest_tag
 
-## Starting up Flux!
+## Starting up Flux
 
 (make sure you have exported `GITHUB_TOKEN` with the secret value first!!)
 
@@ -80,7 +80,7 @@ https://github.com/yourname/ghcr-test/blob/main/deploytest_tag
       --components-extra=image-reflector-controller,image-automation-controller 
     # if you are doing this with an "Org" type account, omit the --personal
 
-And now... wait a few minutes!
+And now... wait a few minutes.
 
 It should take a few minutes for flux to insert its services into the cluster, and then
 a few more minutes for it to read the actual app configuration, and start pulling in
@@ -102,8 +102,8 @@ http://localhost:8080
 
 The downside with port forwarding, other than hogging a terminal, is that it fails on
 service restart.
-
-A way around this is to set up loadbalancer style forwarding on your test node 
+On a "real" deployment you would probably set up fancy external load balancing for the app.
+But for a trivial k3s test node,etc, you can use the built-in node level lb:
 
     kubectl expose service ghcr-app -n ghcr-app \
       --type=LoadBalancer --name=ghcr-app-lb --port=8080
